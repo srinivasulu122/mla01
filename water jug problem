@@ -1,0 +1,53 @@
+def water_jug_problem(jug1_capacity, jug2_capacity, target_capacity):
+  def get_neighbors(current_state):
+    jug1, jug2 = current_state
+    neighbors = []
+    neighbors.append((jug1_capacity, jug2))
+    neighbors.append((jug1, jug2_capacity))
+    neighbors.append((0, jug2))
+    neighbors.append((jug1, 0))
+    pour_amount = min(jug1, jug2_capacity - jug2)
+    neighbors.append((jug1 - pour_amount, jug2 + pour_amount))
+    pour_amount = min(jug2, jug1_capacity - jug1)
+    neighbors.append((jug1 + pour_amount, jug2 - pour_amount))
+    return neighbors
+
+  queue = [(0, 0)]
+  visited = set()
+  parent = {}
+
+  while queue:
+    current_state = queue.pop(0)
+    if current_state in visited:
+      continue
+    visited.add(current_state)
+
+    if current_state[0] == target_capacity or current_state[1] == target_capacity:
+      path = []
+      curr = current_state
+      while curr in parent:
+        path.insert(0, curr)
+        curr = parent[curr]
+      path.insert(0, (0, 0))
+      return path
+
+    for neighbor in get_neighbors(current_state):
+      if neighbor not in visited:
+        queue.append(neighbor)
+        parent[neighbor] = current_state
+
+  return None
+
+if __name__ == "__main__":
+  jug1_capacity = 4
+  jug2_capacity = 3
+  target_capacity = 2
+
+  solution = water_jug_problem(jug1_capacity, jug2_capacity, target_capacity)
+
+  if solution:
+    print("Solution found:")
+    for i, state in enumerate(solution):
+      print(f"Step {i+1}: Jug 1 = {state[0]}, Jug 2 = {state[1]}")
+  else:
+    print("No solution exists.")
