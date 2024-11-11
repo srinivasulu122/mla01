@@ -1,0 +1,70 @@
+
+from collections import defaultdict
+import heapq
+
+def a_star_search(graph, start, goal):
+    """
+    A* search algorithm implementation.
+
+    Args:
+        graph: A dictionary representing the graph where keys are nodes and values are dictionaries of neighbors with associated edge costs.
+        start: The starting node.
+        goal: The goal node.
+
+    Returns:
+        A tuple containing the shortest path from start to goal and its total cost, or None if no path is found.
+    """
+    frontier = [(0, start, [])]  # (f_cost, node, path)
+    visited = set()
+    g_cost = {node: float('inf') for node in graph}
+    g_cost[start] = 0
+
+    while frontier:
+        f_cost, current_node, path = heapq.heappop(frontier)
+
+        if current_node == goal:
+            return path + [current_node], g_cost[current_node]
+
+        if current_node in visited:
+            continue
+        visited.add(current_node)
+
+        for neighbor, edge_cost in graph[current_node].items():
+            new_g_cost = g_cost[current_node] + edge_cost
+            if new_g_cost < g_cost[neighbor]:
+                g_cost[neighbor] = new_g_cost
+                h_cost = heuristic(neighbor, goal)  # Replace with your heuristic function
+                f_cost = new_g_cost + h_cost
+                heapq.heappush(frontier, (f_cost, neighbor, path + [current_node]))
+
+    return None, None
+
+
+def heuristic(node, goal):
+    """
+    Heuristic function (replace with your own heuristic for the specific problem).
+    For example, Manhattan distance for grid-based problems.
+    """
+    return 0 
+
+
+graph = {
+    'A': {'B': 1, 'C': 3},
+    'B': {'D': 5, 'E': 2},
+    'C': {'F': 4},
+    'D': {'G': 1},
+    'E': {'G': 6},
+    'F': {'G': 2},
+    'G': {}
+}
+
+start_node = 'A'
+goal_node = 'G'
+
+shortest_path, total_cost = a_star_search(graph, start_node, goal_node)
+
+if shortest_path:
+    print("Shortest path:", shortest_path)
+    print("Total cost:", total_cost)
+else:
+    print("No path found.")
