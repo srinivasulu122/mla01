@@ -1,0 +1,29 @@
+def solve_vacuum_cleaner():
+    """Solves the vacuum cleaner problem with a simple greedy approach."""
+
+    environment = {
+        (0, 0): 'Dirty',
+        (0, 1): 'Clean',
+        (1, 0): 'Dirty',
+        (1, 1): 'Clean',
+    }
+
+    current_position = (0, 0)
+
+    while any(value == 'Dirty' for value in environment.values()):
+        if environment[current_position] == 'Dirty':
+            print(f"Cleaning square: {current_position}")
+            environment[current_position] = 'Clean'
+        else:
+            for x in range(2):
+                for y in range(2):
+                    if environment[(x, y)] == 'Dirty':
+                        current_position = (x, y)
+                        break
+                else:
+                    continue
+                break
+
+    print("All squares are clean.")
+
+solve_vacuum_cleaner()
