@@ -1,0 +1,26 @@
+def recommend_activity(weather, temperature):
+    if weather == "sunny":
+        if temperature > 30:
+            return "It's hot outside! How about swimming to cool off?"
+        elif 20 <= temperature <= 30:
+            return "A nice day for a picnic or a walk in the park!"
+        else:
+            return "It's sunny but cool. Maybe a short hike?"
+    elif weather == "rainy":
+        if temperature > 15:
+            return "Perfect weather to visit a museum or watch a movie indoors."
+        else:
+            return "It's cold and rainy. How about staying home with a good book?"
+    elif weather == "snowy":
+        if temperature < 0:
+            return "Stay warm! How about building a snowman or having hot chocolate indoors?"
+        else:
+            return "Light snow. Dress warmly if you're going outside!"
+    else:
+        return "Unknown weather condition. Stay safe and check the forecast!"
+
+weather = input("Enter the weather (sunny, rainy, snowy): ").strip().lower()
+temperature = float(input("Enter the temperature in °C: "))
+
+activity = recommend_activity(weather, temperature)
+print(activity)
