@@ -1,0 +1,15 @@
+parent(john, mary).
+parent(john, james).
+parent(mary, lisa).
+parent(mary, tom).
+parent(james, sophia).
+
+is_parent(A, B) :- parent(A, B).
+is_sibling(A, B) :- parent(P, A), parent(P, B), A \= B.
+is_grandparent(A, B) :- parent(A, P), parent(P, B).
+
+
+input and output:
+?- is_parent(john, mary).
+true.
+
