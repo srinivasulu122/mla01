@@ -1,0 +1,23 @@
+can_fly(sparrow).
+can_fly(pigeon).
+can_fly(parrot).
+
+cannot_fly(penguin).
+cannot_fly(ostrich).
+
+bird_status(sparrow, 'sparrow can fly.').
+bird_status(pigeon, 'pigeon can fly.').
+bird_status(parrot, 'parrot can fly.').
+bird_status(penguin, 'penguin cannot fly.').
+bird_status(ostrich, 'ostrich cannot fly.').
+
+bird_can_fly(Bird) :-
+    bird_status(Bird, Status),
+    write(Status), nl.
+
+
+input and output:
+
+bird_can_fly(penguin).
+penguin cannot fly.
+true.
