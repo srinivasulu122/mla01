@@ -1,0 +1,39 @@
+fruit(apple).
+fruit(banana).
+fruit(cherry).
+vegetable(carrot).
+vegetable(potato).
+
+is_fruit(X) :-
+    fruit(X),
+    write(X), write(' is a fruit'), nl.
+
+is_vegetable(X) :-
+    vegetable(X),
+    write(X), write(' is a vegetable'), nl.
+
+is_neither(X) :-
+    \+ fruit(X),
+    \+ vegetable(X),
+    write(X), write(' is neither a fruit nor a vegetable'), nl.
+
+match_fruit_or_vegetable([Head|Tail]) :-
+    is_fruit(Head),
+    match_fruit_or_vegetable(Tail).
+match_fruit_or_vegetable([Head|Tail]) :-
+    is_vegetable(Head),
+    match_fruit_or_vegetable(Tail).
+match_fruit_or_vegetable([]).
+
+
+
+input:
+is_vegetable(potato).
+potato is a vegetable
+true.
+   match_fruit_or_vegetable([apple, potato, banana, carrot]).
+apple is a fruit
+potato is a vegetable
+banana is a fruit
+carrot is a vegetable
+true 
