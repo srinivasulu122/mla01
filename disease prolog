@@ -1,0 +1,17 @@
+diet(diabetes, 'Low sugar, high fiber foods.').
+diet(hypertension, 'Low sodium foods.').
+diet(obesity, 'Low calorie foods.').
+diet(heart_disease, 'Low fat, high omega-3 foods.').
+diet(anemia, 'Iron-rich foods.').
+
+start :-
+    write('Enter disease: '), read(Disease),
+    diet(Disease, Diet),
+    write('Diet: '), write(Diet), nl.
+
+
+input:
+  start.
+Enter disease: diabetes.
+Diet: Low sugar, high fiber foods.
+true.
