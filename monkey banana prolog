@@ -1,0 +1,17 @@
+move(state(at_floor, at_door, has_not), push_chair, state(at_floor, at_banana, has_not)).
+move(state(at_floor, at_banana, has_not), climb_chair, state(on_chair, at_banana, has_not)).
+move(state(on_chair, at_banana, has_not), grasp_banana, state(on_chair, at_banana, has)).
+
+% Solve goal
+solve(state(_, _, has)) :-
+    write('Monkey has the banana!'), nl.
+
+solve(State) :-
+    move(State, Action, NewState),
+    write('Action: '), write(Action), nl,
+    solve(NewState).
+
+% Start solving
+start :-
+    InitialState = state(at_floor, at_door, has_not),
+    solve(InitialState).
