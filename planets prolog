@@ -1,0 +1,8 @@
+planet('mercury', 'terrestrial', 0).
+planet('venus', 'terrestrial', 0).
+planet('earth', 'terrestrial', 1).
+planet('mars', 'terrestrial', 2).
+planet('jupiter', 'gas giant', 79).
+planet('saturn', 'gas giant', 83).
+planet('uranus', 'ice giant', 27).
+planet('neptune', 'ice giant', 14).
