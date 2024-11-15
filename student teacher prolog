@@ -1,0 +1,14 @@
+student('alice', 'math', 'm101').
+student('max', 'science', 's202').
+student('john', 'english', 'e303').
+
+teacher('bob', 'math', 'm101').
+teacher('layla', 'science', 's202').
+teacher('emma', 'english', 'e303').
+
+
+input and output:
+
+input : teacher(Name, 'math', Code).
+output: Name = bob,
+        Code = m101.
