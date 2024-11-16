@@ -1,0 +1,32 @@
+% Facts (known information)
+fact(fever).
+fact(cough).
+fact(runny_nose).
+
+% Rules (inference rules)
+rule(flu, [fever, cough, sore_throat]).
+rule(cold, [cough, runny_nose]).
+rule(covid19, [fever, cough, loss_of_taste_or_smell]).
+
+% Forward chaining to derive conclusions
+forward_chaining(Goal) :-
+    fact(Goal), 
+    !, 
+    write(Goal), write(' is a fact.'), nl.
+
+forward_chaining(Goal) :-
+    rule(Disease, Symptoms),
+    forall(member(Symptom, Symptoms), fact(Symptom)),
+    \+ fact(Goal), 
+    assert(fact(Goal)),
+    write(Goal), write(' has been derived as a fact based on the rules.'), nl.
+
+% To check the forward chaining process
+check :-
+    forward_chaining(flu),
+    forward_chaining(cold),
+    forward_chaining(covid19).
+
+
+input:
+ check.
