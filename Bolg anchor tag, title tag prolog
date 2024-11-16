@@ -1,0 +1,19 @@
+blog_post('My Prolog Blog', 'Welcome to my Prolog blog.', [
+    link('About Me', 'https://example.com/about', 'Learn more about me'),
+    link('Contact', 'mailto:example@example.com', 'Email me for questions')
+]).
+
+display_blog :-
+    blog_post(Title, Content, Links),
+    writeln(Title),
+    writeln(Content),
+    display_links(Links).
+
+display_links([]).
+display_links([link(Text, URL, Tooltip) | Rest]) :-
+    write(Text), write(' ('), write(URL), write('): '), writeln(Tooltip),
+    display_links(Rest).
+
+
+input:
+?- display_blog.
