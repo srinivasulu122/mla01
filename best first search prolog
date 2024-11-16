@@ -1,0 +1,25 @@
+% Define the graph as edges with costs
+edge(a, b, 2).
+edge(a, c, 1).
+edge(b, d, 4).
+edge(c, d, 3).
+edge(c, e, 5).
+edge(d, f, 1).
+edge(e, f, 2).
+
+% Best First Search
+best_first_search(Start, Goal, Path, Cost) :-
+    best_first([[Start, 0]], Goal, [], Path, Cost).
+
+% Helper to perform BFS
+best_first([[Node, C]|_], Node, _, [Node], C) :- !.
+best_first([[Node, C]|Rest], Goal, Visited, [Node|Path], Cost) :-
+    findall([Next, NewCost],
+            (edge(Node, Next, StepCost), \+ member(Next, Visited), NewCost is C + StepCost),
+            Neighbors),
+    append(Rest, Neighbors, AllPaths),
+    sort(2, @=<, AllPaths, SortedPaths),
+    best_first(SortedPaths, Goal, [Node|Visited], Path, Cost).
+
+input:
+?- best_first_search(a, f, Path, Cost).
