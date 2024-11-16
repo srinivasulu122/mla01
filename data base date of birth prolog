@@ -1,0 +1,4 @@
+person(alice, '1990-05-10').
+person(bob, '1985-08-23').
+person(carol, '1992-12-02').
+person(dcavid, '1988-04-15').
