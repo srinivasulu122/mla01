@@ -1,0 +1,30 @@
+% Facts (known information)
+fact(fever).
+fact(cough).
+
+% Rules (inference rules)
+rule(flu, [fever, cough]).
+rule(cold, [cough]).
+
+% Backward chaining to find if a goal is true
+backward_chaining(Goal) :-
+    fact(Goal), 
+    write(Goal), write(' is a known fact.'), nl.
+
+backward_chaining(Goal) :-
+    rule(Goal, Symptoms),
+    write('To prove '), write(Goal), write(', we need to prove: '), nl,
+    prove(Symptoms).
+
+% Prove all symptoms of a rule
+prove([]) :- 
+    write('All symptoms are proved, conclusion reached!'), nl.
+
+prove([Symptom|Rest]) :-
+    backward_chaining(Symptom),
+    prove(Rest).
+
+
+input:
+?- backward_chaining(flu).
+
